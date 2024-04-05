@@ -57,7 +57,7 @@
         const textInput = document.querySelector('#textInput');
         let latexOutput = '';
 
-        const keys = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0', 'Subscript', 'SuperScript', 'e', 'r', 't', 'y', 'u', 'i', 'o', 'p', 'a', 's', 'sa', 're1', 're2', 'ga1', 'ga2', 'ma1', 'ma2', ';', 'z', 'x', 'c', 'pa', 'dha1', 'dha2', 'm', ',', '.', '/', ' ', 'Add Line', '(', ')'];
+        const keys = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0', 'Subscript', 'SuperScript', 'e', 'r', 't', 'y', 'u', 'i', 'o', 'p', 'a', 's', 'sa', 're1', 're2', 'ga1', 'ga2', 'ma1', 'ma2', ';', 'z', 'x', 'c', 'pa', 'dha1', 'dha2', 'm', ',', '.', '/', ' ', 'Single Underline', 'Double Underline', '(', ')'];
 
         keys.forEach(key => {
             const keyElement = document.createElement('div');
@@ -68,12 +68,18 @@
                 const textBeforeCursor = textInput.value.substring(0, cursorPosition);
                 const textAfterCursor = textInput.value.substring(cursorPosition);
 
-                if (key === 'Add Line') {
+                if (key === 'Single Underline') {
                     textInput.value = textBeforeCursor + '\\overline{}' + textAfterCursor; // Add \overline{} template
                     latexOutput = textBeforeCursor + '\\overline{}' + textAfterCursor;
                     renderLatexOutput();
                     textInput.selectionStart = cursorPosition + 10; // Move cursor position
                     textInput.selectionEnd = cursorPosition + 10;
+                } else if (key === 'Double Underline') {
+                    textInput.value = textBeforeCursor + '\\overline{\\overline{}}' + textAfterCursor; // Add \overline{\overline{}} template
+                    latexOutput = textBeforeCursor + '\\overline{\\overline{}}' + textAfterCursor;
+                    renderLatexOutput();
+                    textInput.selectionStart = cursorPosition + 20; // Move cursor position
+                    textInput.selectionEnd = cursorPosition + 20;
                 } else if (key === 'Subscript') {
                     textInput.value = textBeforeCursor + '_{}' + textAfterCursor; // Modified: Use _{} template for subscript
                     latexOutput = textBeforeCursor + '_{}' + textAfterCursor;
@@ -86,8 +92,7 @@
                     renderLatexOutput();
                     textInput.selectionStart = cursorPosition + 2; // Modified: Move cursor position
                     textInput.selectionEnd = cursorPosition + 2;
-                }
-                else if (key === ' ') {
+                } else if (key === ' ') {
                     textInput.value = textBeforeCursor + ' ' + textAfterCursor; // Add space
                     latexOutput = textBeforeCursor + ' ' + textAfterCursor;
                     renderLatexOutput();
