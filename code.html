@@ -57,7 +57,7 @@
         const textInput = document.querySelector('#textInput');
         let latexOutput = '';
 
-        const keys = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0', 'Subscript', 'SuperScript', 'Single Underline', 'Double Underline', 'Dot', 'y', 'u', 'i', 'o', 'p', 'S', 'R1', 'R2', 'G1', 'G2', 'M1', 'M2', 'P', 'D1', 'D2', ',', '.', ';', '-', '=', 'dha2', 'm', ',', '.', '/', ' ', '(', ')'];
+        const keys = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0', 'Subscript', 'SuperScript', 'Single Overline', 'Double Overline', 'Dot', 'Single Underline', 'u', 'i', 'o', 'p', 'S', 'R1', 'R2', 'G1', 'G2', 'M1', 'M2', 'P', 'D1', 'D2', ',', '.', ';', '-', '=', 'dha2', 'm', ',', '.', '/', ' ', '(', ')'];
 
         keys.forEach(key => {
             const keyElement = document.createElement('div');
@@ -68,18 +68,24 @@
                 const textBeforeCursor = textInput.value.substring(0, cursorPosition);
                 const textAfterCursor = textInput.value.substring(cursorPosition);
 
-                if (key === 'Single Underline') {
+                if (key === 'Single Overline') {
                     textInput.value = textBeforeCursor + '\\overline{}' + textAfterCursor; // Add \overline{} template
                     latexOutput = textBeforeCursor + '\\overline{}' + textAfterCursor;
                     renderLatexOutput();
                     textInput.selectionStart = cursorPosition + 10; // Move cursor position
                     textInput.selectionEnd = cursorPosition + 10;
-                } else if (key === 'Double Underline') {
+                } else if (key === 'Double Overline') {
                     textInput.value = textBeforeCursor + '\\overline{\\overline{}}' + textAfterCursor; // Add \overline{\overline{}} template
                     latexOutput = textBeforeCursor + '\\overline{\\overline{}}' + textAfterCursor;
                     renderLatexOutput();
                     textInput.selectionStart = cursorPosition + 20; // Move cursor position
                     textInput.selectionEnd = cursorPosition + 20;
+                } else if (key === 'Single Underline') {
+                    textInput.value = textBeforeCursor + '\\underline{}' + textAfterCursor; // Add \underline{} template
+                    latexOutput = textBeforeCursor + '\\underline{}' + textAfterCursor;
+                    renderLatexOutput();
+                    textInput.selectionStart = cursorPosition + 11; // Move cursor position
+                    textInput.selectionEnd = cursorPosition + 11;
                 } else if (key === 'Subscript') {
                     textInput.value = textBeforeCursor + '_{}' + textAfterCursor; // Modified: Use _{} template for subscript
                     latexOutput = textBeforeCursor + '_{}' + textAfterCursor;
