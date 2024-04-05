@@ -32,7 +32,3 @@ Contributions to this project are welcome. If you encounter any issues, have sug
 ## License
 
 This project is licensed under the Apache License 2.0. See the LICENSE file for more information.
-
----
-
-Feel free to adjust any other details in the README as needed.
