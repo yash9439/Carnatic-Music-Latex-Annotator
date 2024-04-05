@@ -57,7 +57,7 @@
         const textInput = document.querySelector('#textInput');
         let latexOutput = '';
 
-        const keys = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0', 'Subscript', 'SuperScript', 'Single Overline', 'Double Overline', 'Dot', 'UnderDot', 'Single Underline', 'Curve', 'o', 'p', 'S', 'R1', 'R2', 'G1', 'G2', 'M1', 'M2', 'P', 'D1', 'D2', ',', '.', ';', '-', '=', 'dha2', 'm', ',', '.', '/', ' ', '(', ')'];
+        const keys = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0', 'Subscript', 'SuperScript', 'Single Overline', 'Double Overline', 'Dot', 'UnderDot', 'Single Underline', 'Curve', '⌣', 'p', 'S', 'R1', 'R2', 'G1', 'G2', 'M1', 'M2', 'P', 'D1', 'D2', ',', '.', ';', '-', '=', 'dha2', 'm', ',', '.', '/', ' ', '(', ')'];
 
         keys.forEach(key => {
             const keyElement = document.createElement('div');
@@ -122,6 +122,12 @@
                     renderLatexOutput();
                     textInput.selectionStart = cursorPosition + 11; // Move cursor position
                     textInput.selectionEnd = cursorPosition + 11;
+                } else if (key === '⌣') { 
+                    textInput.value = textBeforeCursor + '\\underset{\\smile}{\\text{}}' + textAfterCursor; // Add \underset{\smile}{\text{}} template
+                    latexOutput = textBeforeCursor + '\\underset{\\smile}{\\text{}}' + textAfterCursor;
+                    renderLatexOutput();
+                    textInput.selectionStart = cursorPosition + 24; // Move cursor position
+                    textInput.selectionEnd = cursorPosition + 24;
                 }  else {
                     textInput.value = textBeforeCursor + key + textAfterCursor; // Append key to text input
                     latexOutput = textBeforeCursor + key + textAfterCursor;
