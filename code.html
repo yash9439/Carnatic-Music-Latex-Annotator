@@ -110,6 +110,12 @@
                     renderLatexOutput();
                     textInput.selectionStart = cursorPosition + 5; // Move cursor position
                     textInput.selectionEnd = cursorPosition + 5;
+                } else if (key === 'UnderDot') { 
+                    textInput.value = textBeforeCursor + '\\underset{\\cdot}{\\text{}}' + textAfterCursor; 
+                    latexOutput = textBeforeCursor + '\\underset{\\cdot}{\\text{}}' + textAfterCursor;
+                    renderLatexOutput();
+                    textInput.selectionStart = cursorPosition + 23; // Move cursor position
+                    textInput.selectionEnd = cursorPosition + 23;
                 } else if (key === 'Curve') { 
                     textInput.value = textBeforeCursor + '\\widetilde{}' + textAfterCursor; // Add \widetilde{} template
                     latexOutput = textBeforeCursor + '\\widetilde{}' + textAfterCursor;
