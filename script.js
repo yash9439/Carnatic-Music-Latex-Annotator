@@ -95,3 +95,18 @@ textInput.addEventListener('input', () => {
     latexOutput = textInput.value;
     renderLatexOutput();
 });
+
+// Function to copy LaTeX code from the textarea to clipboard
+function copyLatexCode() {
+    const latexCode = document.querySelector('#textInput').value;
+    const textarea = document.createElement('textarea');
+    textarea.value = latexCode;
+    document.body.appendChild(textarea);
+    textarea.select();
+    document.execCommand('copy');
+    document.body.removeChild(textarea);
+    alert('LaTeX code copied to clipboard!');
+}
+
+// Event listener for the copy button
+document.querySelector('#copyButton').addEventListener('click', copyLatexCode);

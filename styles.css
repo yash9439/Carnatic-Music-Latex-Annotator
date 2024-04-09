@@ -15,11 +15,12 @@
 
 .output-container {
     margin-top: 20px;
+    margin-bottom: 20px;
     font-size: 16px;
     border: 1px solid #ccc;
     padding: 10px;
     min-height: 100px;
-    width: 80%; /* Adjust width as needed */
+    width: 98%; /* Adjust width as needed */
     overflow-y: auto;
 }
 
@@ -31,4 +32,25 @@ textarea {
 
 .active {
     background-color: lightblue;
+}
+
+h1 {
+    text-align: center;
+}
+
+.button-container {
+    margin-bottom: 20px; /* Add some space below the button */
+}
+
+#copyButton {
+    padding: 10px 20px;
+    background-color: #007bff; /* Adjust button background color */
+    color: #fff; /* Adjust button text color */
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#copyButton:hover {
+    background-color: #0056b3; /* Adjust button background color on hover */
 }
