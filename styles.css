@@ -1,0 +1,34 @@
+.keyboard {
+    display: grid;
+    grid-template-columns: repeat(10, 1fr);
+    gap: 5px;
+    margin-top: 20px;
+}
+
+.key {
+    padding: 10px;
+    background-color: #f0f0f0;
+    border: 1px solid #ccc;
+    text-align: center;
+    cursor: pointer;
+}
+
+.output-container {
+    margin-top: 20px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    padding: 10px;
+    min-height: 100px;
+    width: 80%; /* Adjust width as needed */
+    overflow-y: auto;
+}
+
+textarea {
+    margin-top: 20px;
+    width: 80%; /* Adjust width as needed */
+    height: 100px; /* Adjust height as needed */
+}
+
+.active {
+    background-color: lightblue;
+}
