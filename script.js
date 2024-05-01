@@ -3,7 +3,7 @@ const outputElement = document.querySelector('#output');
 const textInput = document.querySelector('#textInput');
 let latexOutput = '';
 
-const keys = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0', 'Subscript', 'SuperScript', 'Single Overline', 'Double Overline', 'Dot', 'UnderDot', 'Single Underline', 'Curve', '⌣', 'p', 'S', 'R1', 'R2', 'G1', 'G2', 'M1', 'M2', 'P', 'D1', 'D2', ',', '.', ';', '-', '=', '(', ')', '\'', '"', '/'];
+const keys = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0', 'Subscript', 'SuperScript', 'Single Overline', 'Double Overline', 'Dot', 'UnderDot', 'Single Underline', 'Curve', '⌣', 'p', 'S', 'R1', 'R2', 'G1', 'G2', 'M1', 'M2', 'P', 'D1', 'D2', ',', '.', ';', '-', '=', '(', ')', '\'', '"', '/', 'a', 'ā', 'i', 'ī', 'u', 'ū', 'r', 'ė', 'ē', 'ai', 'o', 'ō', 'au', 'ṁ', 'ḥ', 'k', 'kh', 'g', 'gh', 'jñ', 'c̣', 'c̣h', 'j', 'jh', 'ñ', 'ṭ', 'ṭh', 'ḍ', 'ḍh', 'ṇ', 't', 'th', 'd', 'dh', 'n', 'p', 'ph', 'b', 'bh', 'm', 'y', 'r', 'l', 'v', 'ś', 'ṣ', 's', 'h', 'ḷ', 'kṣ'];
 
 keys.forEach(key => {
     const keyElement = document.createElement('div');
