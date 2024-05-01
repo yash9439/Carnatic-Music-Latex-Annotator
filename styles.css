@@ -63,8 +63,6 @@ h1 {
     display: inline-block;
     min-width: auto;
     min-height: auto;
-    padding-top: 20px;
-    padding-bottom: 15px;
   }
 
   body {
@@ -74,4 +72,8 @@ h1 {
 #output .MathJax_Display {
     margin-top: 1px; /* Adjust the top margin as needed */
     margin-bottom: 1px; /* Adjust the bottom margin as needed */
+}
+
+.empty-div {
+    height: 20px;
 }
