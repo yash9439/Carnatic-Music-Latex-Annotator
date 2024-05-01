@@ -90,6 +90,45 @@ function renderLatexOutput() {
     MathJax.Hub.Queue(["Typeset", MathJax.Hub, outputElement]);
 }
 
+function downloadLatexOutputAsImage() {
+    html2canvas(document.querySelector("#output"), {
+        allowTaint: true,
+        useCORS: true
+    }).then(function(canvas) {
+        const imgData = canvas.toDataURL('image/png');
+        const tempLink = document.createElement('a');
+        tempLink.download = 'latex-output.png';
+        tempLink.href = imgData;
+        tempLink.click();
+    });
+}
+
+
+function copyLatexOutputAsImage() {
+    html2canvas(document.querySelector("#latexOutputContainer"), {
+        allowTaint: true,
+        useCORS: true
+    }).then(function(canvas) {
+        // Copy the canvas image to the clipboard
+        canvas.toBlob(function(blob) {
+            navigator.clipboard.write([new ClipboardItem({ 'image/png': blob })])
+            .then(function() {
+                alert('Image copied to clipboard!');
+            }) 
+            .catch(function(error) {
+                console.error('Error copying image:', error);
+                alert('Failed to copy image.');
+            });
+        }, 'image/png');
+    }).catch(function(error) {
+        console.error('Error creating canvas:', error);
+        alert('Failed to create image.');
+    });
+}
+
+
+
+
 // Update latexOutput when user edits the text input
 textInput.addEventListener('input', () => {
     latexOutput = textInput.value;
@@ -110,3 +149,7 @@ function copyLatexCode() {
 
 // Event listener for the copy button
 document.querySelector('#copyButton').addEventListener('click', copyLatexCode);
+
+document.querySelector('#copyImageButton').addEventListener('click', copyLatexOutputAsImage);
+
+document.querySelector('#downloadImageButton').addEventListener('click', downloadLatexOutputAsImage);

@@ -4,6 +4,7 @@
 <head>
     <title>Music Latex Annotation</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
     <link rel="stylesheet" href="styles.css">
 </head>
 
@@ -11,9 +12,15 @@
     <h1>Music Latex Annotation</h1>
     <textarea id="textInput"></textarea>
     <div class="keyboard"></div>
-    <div class="output-container" id="output"></div>
+    <!-- <div class="output-container" id="output"></div> -->
+    <div id="latexOutputContainer">
+        <div id="output"></div>
+      </div>
+      
     <div class="button-container">
         <button id="copyButton">Copy LaTeX Code</button>
+        <button id="copyImageButton">Copy Image</button>
+        <button id="downloadImageButton">Download Image</button>
     </div>
     <script src="script.js"></script>
 </body>
