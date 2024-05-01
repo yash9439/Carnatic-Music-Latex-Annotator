@@ -80,13 +80,16 @@ keys.forEach(key => {
             textInput.selectionStart = cursorPosition + key.length; // Move cursor position
             textInput.selectionEnd = cursorPosition + key.length;
             renderLatexOutput();
+            console.log('textInput value:', textInput.value);
+            console.log('Latex value:', latexOutput);
         }
     });
     keyboard.appendChild(keyElement);
 });
 
 function renderLatexOutput() {
-    outputElement.innerHTML = '$$' + latexOutput + '$$';
+    const modifiedLatexOutput = latexOutput.replace(/ /g, '\\ ');
+    outputElement.innerHTML = '$$' + modifiedLatexOutput + '$$';
     MathJax.Hub.Queue(["Typeset", MathJax.Hub, outputElement]);
 }
 
