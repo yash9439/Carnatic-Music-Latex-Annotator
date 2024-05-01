@@ -90,12 +90,31 @@ function renderLatexOutput() {
     MathJax.Hub.Queue(["Typeset", MathJax.Hub, outputElement]);
 }
 
+
+function addWhiteSpaceToCanvas(canvas, whitespaceWidth) {
+    const newCanvas = document.createElement('canvas');
+    const context = newCanvas.getContext('2d');
+    
+    newCanvas.width = canvas.width + (2 * whitespaceWidth);
+    newCanvas.height = canvas.height;
+    
+    // Draw white background
+    context.fillStyle = 'white';
+    context.fillRect(0, 0, newCanvas.width, newCanvas.height);
+    
+    // Draw original canvas content with offset
+    context.drawImage(canvas, whitespaceWidth, 0);
+    
+    return newCanvas;
+}
+
 function downloadLatexOutputAsImage() {
     html2canvas(document.querySelector("#output"), {
         allowTaint: true,
         useCORS: true
     }).then(function(canvas) {
-        const imgData = canvas.toDataURL('image/png');
+        const canvasWithWhiteSpace = addWhiteSpaceToCanvas(canvas, 5);
+        const imgData = canvasWithWhiteSpace.toDataURL('image/png');
         const tempLink = document.createElement('a');
         tempLink.download = 'latex-output.png';
         tempLink.href = imgData;
@@ -109,8 +128,10 @@ function copyLatexOutputAsImage() {
         allowTaint: true,
         useCORS: true
     }).then(function(canvas) {
+        const canvasWithWhiteSpace = addWhiteSpaceToCanvas(canvas, 5);
+        
         // Copy the canvas image to the clipboard
-        canvas.toBlob(function(blob) {
+        canvasWithWhiteSpace.toBlob(function(blob) {
             navigator.clipboard.write([new ClipboardItem({ 'image/png': blob })])
             .then(function() {
                 alert('Image copied to clipboard!');
@@ -125,7 +146,6 @@ function copyLatexOutputAsImage() {
         alert('Failed to create image.');
     });
 }
-
 
 
 
