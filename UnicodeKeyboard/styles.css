@@ -5,6 +5,13 @@
     margin-top: 20px;
 }
 
+.keyboard1 {
+    display: grid;
+    grid-template-columns: repeat(10, 1fr);
+    gap: 5px;
+    margin-top: 20px;
+}
+
 .key {
     padding: 10px;
     background-color: #f0f0f0;

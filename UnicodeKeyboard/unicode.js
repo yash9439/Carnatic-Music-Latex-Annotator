@@ -1,4 +1,5 @@
 const keyboard = document.querySelector('.keyboard');
+const keyboard1 = document.querySelector('.keyboard1');
 const textInput = document.querySelector('#textInput');
 let textContent = ''; 
 
@@ -71,22 +72,6 @@ Object.keys(group1Variants).forEach(baseKey => {
     keyboard.appendChild(baseKeyElement);
 });
 
-// Add a blank line between the groups
-keyboard.appendChild(document.createElement('a'));
-keyboard.appendChild(document.createElement('b')); 
-keyboard.appendChild(document.createElement('c')); 
-keyboard.appendChild(document.createElement('d')); 
-keyboard.appendChild(document.createElement('e')); 
-keyboard.appendChild(document.createElement('f')); 
-keyboard.appendChild(document.createElement('g')); 
-keyboard.appendChild(document.createElement('h')); 
-keyboard.appendChild(document.createElement('i')); 
-keyboard.appendChild(document.createElement('j')); 
-keyboard.appendChild(document.createElement('k')); 
-keyboard.appendChild(document.createElement('l')); 
-keyboard.appendChild(document.createElement('m')); 
-keyboard.appendChild(document.createElement('n')); 
-keyboard.appendChild(document.createElement('n')); 
 
 // Creating base key buttons for Group 2
 Object.keys(group2Variants).forEach(baseKey => {
@@ -94,9 +79,9 @@ Object.keys(group2Variants).forEach(baseKey => {
     baseKeyElement.classList.add('key');
     baseKeyElement.textContent = baseKey;
     baseKeyElement.addEventListener('click', () => {
-        createVariantButtons(group2Variants[baseKey]);
+        createVariantButtons1(group2Variants[baseKey]);
     });
-    keyboard.appendChild(baseKeyElement);
+    keyboard1.appendChild(baseKeyElement);
 });
 
 // Function to create variant buttons
@@ -136,8 +121,38 @@ function createVariantButtons(variants) {
             keyboard.appendChild(baseKeyElement);
         });
 
-        // Add a blank line between the groups
-        keyboard.appendChild(document.createElement('br'));
+    });
+    keyboard.appendChild(backButton);
+}
+
+
+
+// Function to create variant buttons
+function createVariantButtons1(variants) {
+    // Clear existing buttons
+    keyboard1.innerHTML = '';
+
+    // Create variant buttons for the selected base key
+    variants.forEach(variant => {
+        const variantKeyElement = document.createElement('div');
+        variantKeyElement.classList.add('key');
+        variantKeyElement.textContent = variant;
+        variantKeyElement.addEventListener('click', () => {
+            textContent += variant; // Update text box content variable
+            textInput.value += variant;
+            console.log("Updated textContent:", textContent); // Log updated textContent
+        });
+        keyboard1.appendChild(variantKeyElement);
+    });
+
+    // Add back button
+    const backButton = document.createElement('div');
+    backButton.classList.add('key');
+    backButton.textContent = '←';
+    backButton.addEventListener('click', () => {
+        // Go back to base key buttons
+        keyboard1.innerHTML = '';
+
 
         // Creating base key buttons for Group 2
         Object.keys(group2Variants).forEach(baseKey => {
@@ -145,10 +160,10 @@ function createVariantButtons(variants) {
             baseKeyElement.classList.add('key');
             baseKeyElement.textContent = baseKey;
             baseKeyElement.addEventListener('click', () => {
-                createVariantButtons(group2Variants[baseKey]);
+                createVariantButtons1(group2Variants[baseKey]);
             });
-            keyboard.appendChild(baseKeyElement);
+            keyboard1.appendChild(baseKeyElement);
         });
     });
-    keyboard.appendChild(backButton);
+    keyboard1.appendChild(backButton);
 }
