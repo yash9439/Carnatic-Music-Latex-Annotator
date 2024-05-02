@@ -1,0 +1,97 @@
+.keyboard {
+    display: grid;
+    grid-template-columns: repeat(10, 1fr);
+    gap: 5px;
+    margin-top: 20px;
+}
+
+.key {
+    padding: 10px;
+    background-color: #f0f0f0;
+    border: 1px solid #ccc;
+    text-align: center;
+    cursor: pointer;
+}
+
+.output-container {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    padding: 10px;
+    min-height: 100px;
+    width: 98%; /* Adjust width as needed */
+    overflow-y: auto;
+}
+
+textarea {
+    margin-top: 20px;
+    width: 98%; /* Adjust width as needed */
+    height: 100px; /* Adjust height as needed */
+}
+
+.active {
+    background-color: lightblue;
+}
+
+h1 {
+    text-align: center;
+}
+
+.button-container {
+    margin-bottom: 20px; /* Add some space below the button */
+}
+
+#copyButton {
+    padding: 10px 20px;
+    background-color: #007bff; /* Adjust button background color */
+    color: #fff; /* Adjust button text color */
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#copyImageButton {
+    padding: 10px 20px;
+    background-color: #007bff; /* Adjust button background color */
+    color: #fff; /* Adjust button text color */
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#downloadImageButton {
+    padding: 10px 20px;
+    background-color: #007bff; /* Adjust button background color */
+    color: #fff; /* Adjust button text color */
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#copyButton:hover {
+    background-color: #0056b3; /* Adjust button background color on hover */
+}
+
+.key:hover {
+    background-color: #e0e0e0; /* Change the background color on hover */
+}
+
+#latexOutputContainer {
+    display: inline-block;
+    min-width: auto;
+    min-height: auto;
+  }
+
+  body {
+    text-align: center;
+  }
+
+#output .MathJax_Display {
+    margin-top: 1px; /* Adjust the top margin as needed */
+    margin-bottom: 1px; /* Adjust the bottom margin as needed */
+}
+
+.empty-div {
+    height: 20px;
+}

@@ -1,3 +1,7 @@
+const keyboard = document.querySelector('.keyboard');
+const textInput = document.querySelector('#textInput');
+let textContent = ''; 
+
 const variants = {
     'a': ['a', 'ā','a̲', 'ã', 'ạ', 'ȧ'],
     'b': ['b', 'ḃ', 'ḅ', 'ḇ'],
@@ -53,6 +57,23 @@ const variants = {
     'Z': ['Z', 'Ž', 'Ż', 'Ẓ', 'Ẕ']
 };
 
+// Log variants
 for (const char in variants) {
     console.log(char + ": " + variants[char].join(', '));
 }
+
+// Creating keyboard
+Object.keys(variants).forEach(baseKey => {
+    const variantKeys = variants[baseKey];
+    variantKeys.forEach(variant => {
+        const keyElement = document.createElement('div');
+        keyElement.classList.add('key');
+        keyElement.textContent = variant;
+        keyElement.addEventListener('click', () => {
+            textContent += variant; // Update text box content variable
+            textInput.value += variant
+            console.log("Updated textContent:", textContent); // Log updated textContent
+        });
+        keyboard.appendChild(keyElement);
+    });
+});
