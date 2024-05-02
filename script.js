@@ -1,9 +1,25 @@
 const keyboard = document.querySelector('.keyboard');
+const swara1 = document.querySelector('.swara1');
+const swara2 = document.querySelector('.swara2');
+const symbol = document.querySelector('.symbol');
+const rom = document.querySelector('.rom');
+const dev = document.querySelector('.dev');
+
 const outputElement = document.querySelector('#output');
 const textInput = document.querySelector('#textInput');
 let latexOutput = '';
 
-const keys = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0', 'Subscript', 'SuperScript', 'Single Overline', 'Double Overline', 'Dot', 'UnderDot', 'Single Underline', 'Curve', '⌣', 'p', 'S', 'R1', 'R2', 'G1', 'G2', 'M1', 'M2', 'P', 'D1', 'D2', 'N1', 'N2','s', 'r', 'R', 'g', 'G', 'm', 'M', 'P', 'd', 'D', 'n', 'N', ',', '.', ';', '-', '=', '(', ')', '\'', '"', '/', 'अ - a', 'ā', 'i', 'ī', 'u', 'ū', 'r', 'ė', 'ē', 'ai', 'o', 'ō', 'au', 'ṁ', 'ḥ', 'k', 'kh', 'g', 'gh', 'jñ', 'c̣', 'c̣h', 'j', 'jh', 'ñ', 'ṭ', 'ṭh', 'ḍ', 'ḍh', 'ṇ', 't', 'th', 'd', 'dh', 'n', 'p', 'ph', 'b', 'bh', 'm', 'y', 'r', 'l', 'v', 'ś', 'ṣ', 's', 'h', 'ḷ', 'kṣ'];
+const keys = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0', 'Subscript', 'SuperScript', 'Single Overline', 'Double Overline', 'Dot', 'UnderDot', 'Single Underline', 'Curve', '⌣', '⌢', ',', '.', ';', '-', '=', '(', ')', '\'', '"', '/'];
+
+const swara1Keys =  ['S', 'R1', 'R2', 'G1', 'G2', 'M1', 'M2', 'P', 'D1', 'D2', 'N1', 'N2'];
+
+const swara2Keys = ['s', 'r', 'R', 'g', 'G', 'm', 'M', 'P', 'd', 'D', 'n', 'N'];
+
+
+const romKeys = ['अ - a', 'ā', 'i', 'ī', 'u', 'ū', 'r', 'ė', 'ē', 'ai', 'o', 'ō', 'au', 'ṁ', 'ḥ', 'k', 'kh', 'g', 'gh', 'jñ', 'c̣', 'c̣h', 'j', 'jh', 'ñ', 'ṭ', 'ṭh', 'ḍ', 'ḍh', 'ṇ', 't', 'th', 'd', 'dh', 'n', 'p', 'ph', 'b', 'bh', 'm', 'y', 'r', 'l', 'v', 'ś', 'ṣ', 's', 'h', 'ḷ', 'kṣ'];
+
+
+const devKeys = ['अ', 'आ', 'इ', 'ई', 'उ', 'ऊ', 'ऋ', 'ए', 'ऐ', 'ओ', 'औ', 'क', 'ख', 'ग', 'घ', 'ङ', 'च', 'छ', 'ज', 'झ', 'ञ', 'ट', 'ठ', 'ड', 'ढ', 'ण', 'त', 'थ', 'द', 'ध', 'न', 'प', 'फ', 'ब', 'भ', 'म', 'य', 'र', 'ल', 'व', 'श', 'ष', 'स', 'ह', 'ळ', 'क्ष'];
 
 keys.forEach(key => {
     const keyElement = document.createElement('div');
@@ -74,7 +90,13 @@ keys.forEach(key => {
             renderLatexOutput();
             textInput.selectionStart = cursorPosition + 24; // Move cursor position
             textInput.selectionEnd = cursorPosition + 24;
-        }  else {
+        } else if (key === '⌢') { 
+            textInput.value = textBeforeCursor + '\\overset{\\frown}{\\text{}}' + textAfterCursor; // Add \underset{\smile}{\text{}} template
+            latexOutput = textBeforeCursor + '\\overset{\\frown}{\\text{}}' + textAfterCursor;
+            renderLatexOutput();
+            textInput.selectionStart = cursorPosition + 23; // Move cursor position
+            textInput.selectionEnd = cursorPosition + 23;
+        } else {
             textInput.value = textBeforeCursor + key + textAfterCursor; // Append key to text input
             latexOutput = textBeforeCursor + key + textAfterCursor;
             textInput.selectionStart = cursorPosition + key.length; // Move cursor position
@@ -85,6 +107,91 @@ keys.forEach(key => {
         }
     });
     keyboard.appendChild(keyElement);
+});
+
+
+swara1Keys.forEach(key => {
+    const keyElement = document.createElement('div');
+    keyElement.classList.add('key');
+    keyElement.textContent = key;
+    keyElement.addEventListener('click', () => {
+        const cursorPosition = textInput.selectionStart; // Get cursor position
+        const textBeforeCursor = textInput.value.substring(0, cursorPosition);
+        const textAfterCursor = textInput.value.substring(cursorPosition);
+  
+        textInput.value = textBeforeCursor + key + textAfterCursor; // Append key to text input
+        latexOutput = textBeforeCursor + key + textAfterCursor;
+        textInput.selectionStart = cursorPosition + key.length; // Move cursor position
+        textInput.selectionEnd = cursorPosition + key.length;
+        renderLatexOutput();
+        console.log('textInput value:', textInput.value);
+        console.log('Latex value:', latexOutput);
+        
+    });
+    swara1.appendChild(keyElement);
+});
+
+swara2Keys.forEach(key => {
+    const keyElement = document.createElement('div');
+    keyElement.classList.add('key');
+    keyElement.textContent = key;
+    keyElement.addEventListener('click', () => {
+        const cursorPosition = textInput.selectionStart; // Get cursor position
+        const textBeforeCursor = textInput.value.substring(0, cursorPosition);
+        const textAfterCursor = textInput.value.substring(cursorPosition);
+  
+        textInput.value = textBeforeCursor + key + textAfterCursor; // Append key to text input
+        latexOutput = textBeforeCursor + key + textAfterCursor;
+        textInput.selectionStart = cursorPosition + key.length; // Move cursor position
+        textInput.selectionEnd = cursorPosition + key.length;
+        renderLatexOutput();
+        console.log('textInput value:', textInput.value);
+        console.log('Latex value:', latexOutput);
+        
+    });
+    swara2.appendChild(keyElement);
+});
+
+romKeys.forEach(key => {
+    const keyElement = document.createElement('div');
+    keyElement.classList.add('key');
+    keyElement.textContent = key;
+    keyElement.addEventListener('click', () => {
+        const cursorPosition = textInput.selectionStart; // Get cursor position
+        const textBeforeCursor = textInput.value.substring(0, cursorPosition);
+        const textAfterCursor = textInput.value.substring(cursorPosition);
+  
+        textInput.value = textBeforeCursor + key + textAfterCursor; // Append key to text input
+        latexOutput = textBeforeCursor + key + textAfterCursor;
+        textInput.selectionStart = cursorPosition + key.length; // Move cursor position
+        textInput.selectionEnd = cursorPosition + key.length;
+        renderLatexOutput();
+        console.log('textInput value:', textInput.value);
+        console.log('Latex value:', latexOutput);
+        
+    });
+    rom.appendChild(keyElement);
+});
+
+devKeys.forEach(key => {
+    const keyElement = document.createElement('div');
+    keyElement.classList.add('key');
+    keyElement.textContent = key;
+    keyElement.addEventListener('click', () => {
+        const cursorPosition = textInput.selectionStart; // Get cursor position
+        const textBeforeCursor = textInput.value.substring(0, cursorPosition);
+        const textAfterCursor = textInput.value.substring(cursorPosition);
+  
+        textInput.value = textBeforeCursor + key + textAfterCursor; // Append key to text input
+        latexOutput = textBeforeCursor + key + textAfterCursor;
+        textInput.selectionStart = cursorPosition + key.length; // Move cursor position
+        textInput.selectionEnd = cursorPosition + key.length;
+        renderLatexOutput();
+        console.log('textInput value:', textInput.value);
+        console.log('Latex value:', latexOutput);
+        
+    });
+    dev.appendChild(keyElement);
 });
 
 // function renderLatexOutput() {
