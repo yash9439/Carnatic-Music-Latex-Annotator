@@ -87,8 +87,14 @@ keys.forEach(key => {
     keyboard.appendChild(keyElement);
 });
 
+// function renderLatexOutput() {
+//     const modifiedLatexOutput = latexOutput.replace(/ /g, '\\ ');
+//     outputElement.innerHTML = '$$' + modifiedLatexOutput + '$$';
+//     MathJax.Hub.Queue(["Typeset", MathJax.Hub, outputElement]);
+// }
+
 function renderLatexOutput() {
-    const modifiedLatexOutput = latexOutput.replace(/ /g, '\\ ');
+    const modifiedLatexOutput = latexOutput.replace(/ /g, '\\ ').replace(/\n/g, '\\\\');
     outputElement.innerHTML = '$$' + modifiedLatexOutput + '$$';
     MathJax.Hub.Queue(["Typeset", MathJax.Hub, outputElement]);
 }

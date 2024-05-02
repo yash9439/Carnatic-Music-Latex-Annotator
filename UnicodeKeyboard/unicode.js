@@ -126,7 +126,6 @@ function createVariantButtons(variants) {
 }
 
 
-
 // Function to create variant buttons
 function createVariantButtons1(variants) {
     // Clear existing buttons
