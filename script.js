@@ -21,6 +21,32 @@ const romKeys = ['a', 'ā', 'i', 'ī', 'u', 'ū', 'r', 'ė', 'ē', 'ai', 'o', '�
 
 const devKeys = ['अ', 'आ', 'इ', 'ई', 'उ', 'ऊ', 'ऋ', 'ए', 'ए' ,'ऐ', 'ओ', 'ओ', 'औ','अं', 'अः', 'क', 'ख', 'ग', 'घ', 'ङ', 'च', 'छ', 'ज', 'झ', 'ञ', 'ट', 'ठ', 'ड', 'ढ', 'ण', 'त', 'थ', 'द', 'ध', 'न', 'प', 'फ', 'ब', 'भ', 'म', 'य', 'र', 'ल', 'व', 'श', 'ष', 'स', 'ह', 'ळ', 'क्ष'];
 
+const variantsDict = {};
+
+// Add variants for each character
+devKeys.forEach(char => {
+    variantsDict[char] = [
+        char, // Original character
+        char + 'ा', // Vowel sign 'aa'
+        char + 'ि', // Vowel sign 'i'
+        char + 'ी', // Vowel sign 'ii'
+        char + 'ु', // Vowel sign 'u'
+        char + 'ू', // Vowel sign 'uu'
+        char + 'े', // Vowel sign 'e'
+        char + 'ै', // Vowel sign 'ai'
+        char + 'ो', // Vowel sign 'o'
+        char + 'ौ', // Vowel sign 'au'
+        char + 'ं', // Anusvara
+        char + 'ः', // Visarga
+        char + '्', // Virama (Halant)
+        char + 'ृ', // Vowel sign 'ru'
+        char + 'ॄ', // Vowel sign 'ruu'
+        char + 'ॅ', // Vowel sign 'l'
+        char + 'ॉ', // Vowel sign 'll'
+    ];
+});
+
+
 keys.forEach(key => {
     const keyElement = document.createElement('div');
     keyElement.classList.add('key');
