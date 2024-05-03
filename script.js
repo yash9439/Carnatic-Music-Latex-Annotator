@@ -9,7 +9,7 @@ const outputElement = document.querySelector('#output');
 const textInput = document.querySelector('#textInput');
 let latexOutput = '';
 
-const keys = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0', 'Subscript', 'SuperScript', 'Single Overline', 'Double Overline', 'Dot', 'UnderDot', 'Single Underline', 'Curve', '⌣', '⌢', '| above', ',', '.', ';', '-', '=', '(', ')', '\'', '"', '/'];
+const keys = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0', 'Subscript', 'SuperScript', 'Single Overline', 'Double Overline', 'Dot', 'UnderDot', 'Single Underline', 'Curve', '⌣', '⌢', '| above', ',', '.', ';', '-', '=', '(', ')', '\'', '"', '/', '+'];
 
 const swara1Keys =  ['S', 'R1', 'R2', 'G1', 'G2', 'M1', 'M2', 'P', 'D1', 'D2', 'N1', 'N2'];
 
