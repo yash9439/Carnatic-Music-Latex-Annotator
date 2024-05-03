@@ -4,6 +4,7 @@ const swara2 = document.querySelector('.swara2');
 const symbol = document.querySelector('.symbol');
 const rom = document.querySelector('.rom');
 const dev = document.querySelector('.dev');
+const dev_simple = document.querySelector('.dev_simple');
 
 const outputElement = document.querySelector('#output');
 const textInput = document.querySelector('#textInput');
@@ -19,32 +20,281 @@ const swara2Keys = ['s', 'r', 'R', 'g', 'G', 'm', 'M', 'P', 'd', 'D', 'n', 'N'];
 const romKeys = ['a', 'ā', 'i', 'ī', 'u', 'ū', 'r', 'ė', 'ē', 'ai', 'o', 'ō', 'au', 'ṁ', 'ḥ', 'k', 'kh', 'g', 'gh', 'jñ', 'c̣', 'c̣h', 'j', 'jh', 'ñ', 'ṭ', 'ṭh', 'ḍ', 'ḍh', 'ṇ', 't', 'th', 'd', 'dh', 'n', 'p', 'ph', 'b', 'bh', 'm', 'y', 'r', 'l', 'v', 'ś', 'ṣ', 's', 'h', 'ḷ', 'kṣ'];
 
 
-const devKeys = ['अ', 'आ', 'इ', 'ई', 'उ', 'ऊ', 'ऋ', 'ए', 'ए' ,'ऐ', 'ओ', 'ओ', 'औ','अं', 'अः', 'क', 'ख', 'ग', 'घ', 'ङ', 'च', 'छ', 'ज', 'झ', 'ञ', 'ट', 'ठ', 'ड', 'ढ', 'ण', 'त', 'थ', 'द', 'ध', 'न', 'प', 'फ', 'ब', 'भ', 'म', 'य', 'र', 'ल', 'व', 'श', 'ष', 'स', 'ह', 'ळ', 'क्ष'];
+// const devKeys = ['अ', 'आ', 'इ', 'ई', 'उ', 'ऊ', 'ऋ', 'ए', 'ए' ,'ऐ', 'ओ', 'ओ', 'औ','अं', 'अः', 'क', 'ख', 'ग', 'घ', 'ङ', 'च', 'छ', 'ज', 'झ', 'ञ', 'ट', 'ठ', 'ड', 'ढ', 'ण', 'त', 'थ', 'द', 'ध', 'न', 'प', 'फ', 'ब', 'भ', 'म', 'य', 'र', 'ल', 'व', 'श', 'ष', 'स', 'ह', 'ळ', 'क्ष'];
 
-const variantsDict = {};
+const devKeys = ['अ', 'आ', 'इ', 'ई', 'उ', 'ऊ', 'ऋ', 'ए', 'ए' ,'ऐ', 'ओ', 'ओ', 'औ','अं', 'अः'];
 
-// Add variants for each character
-devKeys.forEach(char => {
-    variantsDict[char] = [
-        char, // Original character
-        char + 'ा', // Vowel sign 'aa'
-        char + 'ि', // Vowel sign 'i'
-        char + 'ी', // Vowel sign 'ii'
-        char + 'ु', // Vowel sign 'u'
-        char + 'ू', // Vowel sign 'uu'
-        char + 'े', // Vowel sign 'e'
-        char + 'ै', // Vowel sign 'ai'
-        char + 'ो', // Vowel sign 'o'
-        char + 'ौ', // Vowel sign 'au'
-        char + 'ं', // Anusvara
-        char + 'ः', // Visarga
-        char + '्', // Virama (Halant)
-        char + 'ृ', // Vowel sign 'ru'
-        char + 'ॄ', // Vowel sign 'ruu'
-        char + 'ॅ', // Vowel sign 'l'
-        char + 'ॉ', // Vowel sign 'll'
-    ];
-});
+
+const variantsDict = {
+    'क': [
+      'क',  'का', 'कि', 'की',
+      'कु',  'कू',  'के',  'कै',
+      'को', 'कौ', 'कं',  'कः',
+      'क्',  'कृ',  'कॄ',  'कॅ',
+      'कॉ'
+    ],
+    'ख': [
+      'ख',  'खा', 'खि', 'खी',
+      'खु',  'खू',  'खे',  'खै',
+      'खो', 'खौ', 'खं',  'खः',
+      'ख्',  'खृ',  'खॄ',  'खॅ',
+      'खॉ'
+    ],
+    'ग': [
+      'ग',  'गा', 'गि', 'गी',
+      'गु',  'गू',  'गे',  'गै',
+      'गो', 'गौ', 'गं',  'गः',
+      'ग्',  'गृ',  'गॄ',  'गॅ',
+      'गॉ'
+    ],
+    'घ': [
+      'घ',  'घा', 'घि', 'घी',
+      'घु',  'घू',  'घे',  'घै',
+      'घो', 'घौ', 'घं',  'घः',
+      'घ्',  'घृ',  'घॄ',  'घॅ',
+      'घॉ'
+    ],
+    'ङ': [
+      'ङ',  'ङा', 'ङि', 'ङी',
+      'ङु',  'ङू',  'ङे',  'ङै',
+      'ङो', 'ङौ', 'ङं',  'ङः',
+      'ङ्',  'ङृ',  'ङॄ',  'ङॅ',
+      'ङॉ'
+    ],
+    'च': [
+      'च',  'चा', 'चि', 'ची',
+      'चु',  'चू',  'चे',  'चै',
+      'चो', 'चौ', 'चं',  'चः',
+      'च्',  'चृ',  'चॄ',  'चॅ',
+      'चॉ'
+    ],
+    'छ': [
+      'छ',  'छा', 'छि', 'छी',
+      'छु',  'छू',  'छे',  'छै',
+      'छो', 'छौ', 'छं',  'छः',
+      'छ्',  'छृ',  'छॄ',  'छॅ',
+      'छॉ'
+    ],
+    'ज': [
+      'ज',  'जा', 'जि', 'जी',
+      'जु',  'जू',  'जे',  'जै',
+      'जो', 'जौ', 'जं',  'जः',
+      'ज्',  'जृ',  'जॄ',  'जॅ',
+      'जॉ'
+    ],
+    'झ': [
+      'झ',  'झा', 'झि', 'झी',
+      'झु',  'झू',  'झे',  'झै',
+      'झो', 'झौ', 'झं',  'झः',
+      'झ्',  'झृ',  'झॄ',  'झॅ',
+      'झॉ'
+    ],
+    'ञ': [
+      'ञ',  'ञा', 'ञि', 'ञी',
+      'ञु',  'ञू',  'ञे',  'ञै',
+      'ञो', 'ञौ', 'ञं',  'ञः',
+      'ञ्',  'ञृ',  'ञॄ',  'ञॅ',
+      'ञॉ'
+    ],
+    'ट': [
+      'ट',  'टा', 'टि', 'टी',
+      'टु',  'टू',  'टे',  'टै',
+      'टो', 'टौ', 'टं',  'टः',
+      'ट्',  'टृ',  'टॄ',  'टॅ',
+      'टॉ'
+    ],
+    'ठ': [
+      'ठ',  'ठा', 'ठि', 'ठी',
+      'ठु',  'ठू',  'ठे',  'ठै',
+      'ठो', 'ठौ', 'ठं',  'ठः',
+      'ठ्',  'ठृ',  'ठॄ',  'ठॅ',
+      'ठॉ'
+    ],
+    'ड': [
+      'ड',  'डा', 'डि', 'डी',
+      'डु',  'डू',  'डे',  'डै',
+      'डो', 'डौ', 'डं',  'डः',
+      'ड्',  'डृ',  'डॄ',  'डॅ',
+      'डॉ'
+    ],
+    'ढ': [
+      'ढ',  'ढा', 'ढि', 'ढी',
+      'ढु',  'ढू',  'ढे',  'ढै',
+      'ढो', 'ढौ', 'ढं',  'ढः',
+      'ढ्',  'ढृ',  'ढॄ',  'ढॅ',
+      'ढॉ'
+    ],
+    'ण': [
+      'ण',  'णा', 'णि', 'णी',
+      'णु',  'णू',  'णे',  'णै',
+      'णो', 'णौ', 'णं',  'णः',
+      'ण्',  'णृ',  'णॄ',  'णॅ',
+      'णॉ'
+    ],
+    'त': [
+      'त',  'ता', 'ति', 'ती',
+      'तु',  'तू',  'ते',  'तै',
+      'तो', 'तौ', 'तं',  'तः',
+      'त्',  'तृ',  'तॄ',  'तॅ',
+      'तॉ'
+    ],
+    'थ': [
+      'थ',  'था', 'थि', 'थी',
+      'थु',  'थू',  'थे',  'थै',
+      'थो', 'थौ', 'थं',  'थः',
+      'थ्',  'थृ',  'थॄ',  'थॅ',
+      'थॉ'
+    ],
+    'द': [
+      'द',  'दा', 'दि', 'दी',
+      'दु',  'दू',  'दे',  'दै',
+      'दो', 'दौ', 'दं',  'दः',
+      'द्',  'दृ',  'दॄ',  'दॅ',
+      'दॉ'
+    ],
+    'ध': [
+      'ध',  'धा', 'धि', 'धी',
+      'धु',  'धू',  'धे',  'धै',
+      'धो', 'धौ', 'धं',  'धः',
+      'ध्',  'धृ',  'धॄ',  'धॅ',
+      'धॉ'
+    ],
+    'न': [
+      'न',  'ना', 'नि', 'नी',
+      'नु',  'नू',  'ने',  'नै',
+      'नो', 'नौ', 'नं',  'नः',
+      'न्',  'नृ',  'नॄ',  'नॅ',
+      'नॉ'
+    ],
+    'प': [
+      'प',  'पा', 'पि', 'पी',
+      'पु',  'पू',  'पे',  'पै',
+      'पो', 'पौ', 'पं',  'पः',
+      'प्',  'पृ',  'पॄ',  'पॅ',
+      'पॉ'
+    ],
+    'फ': [
+      'फ',  'फा', 'फि', 'फी',
+      'फु',  'फू',  'फे',  'फै',
+      'फो', 'फौ', 'फं',  'फः',
+      'फ्',  'फृ',  'फॄ',  'फॅ',
+      'फॉ'
+    ],
+    'ब': [
+      'ब',  'बा', 'बि', 'बी',
+      'बु',  'बू',  'बे',  'बै',
+      'बो', 'बौ', 'बं',  'बः',
+      'ब्',  'बृ',  'बॄ',  'बॅ',
+      'बॉ'
+    ],
+    'भ': [
+      'भ',  'भा', 'भि', 'भी',
+      'भु',  'भू',  'भे',  'भै',
+      'भो', 'भौ', 'भं',  'भः',
+      'भ्',  'भृ',  'भॄ',  'भॅ',
+      'भॉ'
+    ],
+    'म': [
+      'म',  'मा', 'मि', 'मी',
+      'मु',  'मू',  'मे',  'मै',
+      'मो', 'मौ', 'मं',  'मः',
+      'म्',  'मृ',  'मॄ',  'मॅ',
+      'मॉ'
+    ],
+    'य': [
+      'य',  'या', 'यि', 'यी',
+      'यु',  'यू',  'ये',  'यै',
+      'यो', 'यौ', 'यं',  'यः',
+      'य्',  'यृ',  'यॄ',  'यॅ',
+      'यॉ'
+    ],
+    'र': [
+      'र',  'रा', 'रि', 'री',
+      'रु',  'रू',  'रे',  'रै',
+      'रो', 'रौ', 'रं',  'रः',
+      'र्',  'रृ',  'रॄ',  'रॅ',
+      'रॉ'
+    ],
+    'ल': [
+      'ल',  'ला', 'लि', 'ली',
+      'लु',  'लू',  'ले',  'लै',
+      'लो', 'लौ', 'लं',  'लः',
+      'ल्',  'लृ',  'लॄ',  'लॅ',
+      'लॉ'
+    ],
+    'व': [
+      'व',  'वा', 'वि', 'वी',
+      'वु',  'वू',  'वे',  'वै',
+      'वो', 'वौ', 'वं',  'वः',
+      'व्',  'वृ',  'वॄ',  'वॅ',
+      'वॉ'
+    ],
+    'श': [
+      'श',  'शा', 'शि', 'शी',
+      'शु',  'शू',  'शे',  'शै',
+      'शो', 'शौ', 'शं',  'शः',
+      'श्',  'शृ',  'शॄ',  'शॅ',
+      'शॉ'
+    ],
+    'ष': [
+      'ष',  'षा', 'षि', 'षी',
+      'षु',  'षू',  'षे',  'षै',
+      'षो', 'षौ', 'षं',  'षः',
+      'ष्',  'षृ',  'षॄ',  'षॅ',
+      'षॉ'
+    ],
+    'स': [
+      'स',  'सा', 'सि', 'सी',
+      'सु',  'सू',  'से',  'सै',
+      'सो', 'सौ', 'सं',  'सः',
+      'स्',  'सृ',  'सॄ',  'सॅ',
+      'सॉ'
+    ],
+    'ह': [
+      'ह',  'हा', 'हि', 'ही',
+      'हु',  'हू',  'हे',  'है',
+      'हो', 'हौ', 'हं',  'हः',
+      'ह्',  'हृ',  'हॄ',  'हॅ',
+      'हॉ'
+    ],
+    'ळ': [
+      'ळ',  'ळा', 'ळि', 'ळी',
+      'ळु',  'ळू',  'ळे',  'ळै',
+      'ळो', 'ळौ', 'ळं',  'ळः',
+      'ळ्',  'ळृ',  'ळॄ',  'ळॅ',
+      'ळॉ'
+    ],
+    'क्ष': [
+      'क्ष',  'क्षा', 'क्षि', 'क्षी',
+      'क्षु',  'क्षू',  'क्षे',  'क्षै',
+      'क्षो', 'क्षौ', 'क्षं',  'क्षः',
+      'क्ष्',  'क्षृ',  'क्षॄ',  'क्षॅ',
+      'क्षॉ'
+    ]
+  }
+
+// // Add variants for each character
+// devKeys.forEach(char => {
+//     variantsDict[char] = [
+//         char, // Original character
+//         char + 'ा', // Vowel sign 'aa'
+//         char + 'ि', // Vowel sign 'i'
+//         char + 'ी', // Vowel sign 'ii'
+//         char + 'ु', // Vowel sign 'u'
+//         char + 'ू', // Vowel sign 'uu'
+//         char + 'े', // Vowel sign 'e'
+//         char + 'ै', // Vowel sign 'ai'
+//         char + 'ो', // Vowel sign 'o'
+//         char + 'ौ', // Vowel sign 'au'
+//         char + 'ं', // Anusvara
+//         char + 'ः', // Visarga
+//         char + '्', // Virama (Halant)
+//         char + 'ृ', // Vowel sign 'ru'
+//         char + 'ॄ', // Vowel sign 'ruu'
+//         char + 'ॅ', // Vowel sign 'l'
+//         char + 'ॉ', // Vowel sign 'll'
+//     ];
+// });
 
 
 keys.forEach(key => {
@@ -248,8 +498,70 @@ devKeys.forEach(key => {
         console.log('Latex value:', latexOutput);
         
     });
-    dev.appendChild(keyElement);
+    dev_simple.appendChild(keyElement);
 });
+
+
+// Creating base key buttons for dev
+Object.keys(variantsDict).forEach(baseKey => {
+    const baseKeyElement = document.createElement('div');
+    baseKeyElement.classList.add('key');
+    baseKeyElement.textContent = baseKey;
+    baseKeyElement.addEventListener('click', () => {
+        createVariantButtons(variantsDict[baseKey]);
+    });
+    dev.appendChild(baseKeyElement);
+});
+
+
+// Function to create variant buttons
+function createVariantButtons(variants) {
+    // Clear existing buttons
+    dev.innerHTML = '';
+
+    // Create variant buttons for the selected base key
+    variants.forEach(variant => {
+        const variantKeyElement = document.createElement('div');
+        variantKeyElement.classList.add('key');
+        variantKeyElement.textContent = variant;
+        variantKeyElement.addEventListener('click', () => {
+            const cursorPosition = textInput.selectionStart; // Get cursor position
+            const textBeforeCursor = textInput.value.substring(0, cursorPosition);
+            const textAfterCursor = textInput.value.substring(cursorPosition);
+    
+            textInput.value = textBeforeCursor + variant + textAfterCursor; // Append key to text input
+            latexOutput = textBeforeCursor + variant + textAfterCursor;
+            textInput.selectionStart = cursorPosition + variant.length; // Move cursor position
+            textInput.selectionEnd = cursorPosition + variant.length;
+            renderLatexOutput();
+        });
+        dev.appendChild(variantKeyElement);
+    });
+
+    // Add back button
+    const backButton = document.createElement('div');
+    backButton.classList.add('key');
+    backButton.textContent = '←';
+    backButton.addEventListener('click', () => {
+        // Go back to base key buttons
+        dev.innerHTML = '';
+
+        // Creating base key buttons for Group 1
+        Object.keys(variantsDict).forEach(baseKey => {
+            const baseKeyElement = document.createElement('div');
+            baseKeyElement.classList.add('key');
+            baseKeyElement.textContent = baseKey;
+            baseKeyElement.addEventListener('click', () => {
+                createVariantButtons(variantsDict[baseKey]);
+            });
+            dev.appendChild(baseKeyElement);
+        });
+
+    });
+    dev.appendChild(backButton);
+}
+
+
 
 // function renderLatexOutput() {
 //     const modifiedLatexOutput = latexOutput.replace(/ /g, '\\ ');

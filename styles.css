@@ -1,4 +1,4 @@
-.keyboard, .swara1, .swara2, .rom, .dev {
+.keyboard, .swara1, .swara2, .rom, .dev, .dev_simple {
     display: grid;
     grid-template-columns: repeat(10, 1fr);
     gap: 5px;
