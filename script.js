@@ -9,7 +9,7 @@ const outputElement = document.querySelector('#output');
 const textInput = document.querySelector('#textInput');
 let latexOutput = '';
 
-const keys = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0', 'Subscript', 'SuperScript', 'Single Overline', 'Double Overline', 'Dot', 'UnderDot', 'Single Underline', 'Curve', '⌣', '⌢', ',', '.', ';', '-', '=', '(', ')', '\'', '"', '/'];
+const keys = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0', 'Subscript', 'SuperScript', 'Single Overline', 'Double Overline', 'Dot', 'UnderDot', 'Single Underline', 'Curve', '⌣', '⌢', '| above', ',', '.', ';', '-', '=', '(', ')', '\'', '"', '/'];
 
 const swara1Keys =  ['S', 'R1', 'R2', 'G1', 'G2', 'M1', 'M2', 'P', 'D1', 'D2', 'N1', 'N2'];
 
@@ -96,7 +96,14 @@ keys.forEach(key => {
             renderLatexOutput();
             textInput.selectionStart = cursorPosition + 23; // Move cursor position
             textInput.selectionEnd = cursorPosition + 23;
-        } else {
+        } else if (key === '| above') { 
+            textInput.value = textBeforeCursor + '\\overset{|}{}' + textAfterCursor; // Add \underset{\smile}{\text{}} template
+            latexOutput = textBeforeCursor + '\\overset{|}{}' + textAfterCursor;
+            renderLatexOutput();
+            textInput.selectionStart = cursorPosition + 12; // Move cursor position
+            textInput.selectionEnd = cursorPosition + 12;
+        } 
+        else {
             textInput.value = textBeforeCursor + key + textAfterCursor; // Append key to text input
             latexOutput = textBeforeCursor + key + textAfterCursor;
             textInput.selectionStart = cursorPosition + key.length; // Move cursor position
