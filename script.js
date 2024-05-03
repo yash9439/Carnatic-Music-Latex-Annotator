@@ -9,7 +9,7 @@ const outputElement = document.querySelector('#output');
 const textInput = document.querySelector('#textInput');
 let latexOutput = '';
 
-const keys = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0', 'Subscript', 'SuperScript', 'Single Overline', 'Double Overline', 'Dot', 'UnderDot', 'Single Underline', 'Curve', '⌣', '⌢', '| above', ',', '.', ';', '-', '=', '(', ')', '\'', '"', '/', '+'];
+const keys = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0', 'Subscript', 'SuperScript', 'Single Overline', 'Double Overline', 'Triple Overline', 'Dot', 'UnderDot', 'Single Underline', 'Curve', '⌣', '⌢', '| above', ',', '.', ';', '-', '=', '(', ')', '\'', '"', '/', '+'];
 
 const swara1Keys =  ['S', 'R1', 'R2', 'G1', 'G2', 'M1', 'M2', 'P', 'D1', 'D2', 'N1', 'N2'];
 
@@ -42,6 +42,12 @@ keys.forEach(key => {
             renderLatexOutput();
             textInput.selectionStart = cursorPosition + 20; // Move cursor position
             textInput.selectionEnd = cursorPosition + 20;
+        } else if (key === 'Triple Overline') {
+            textInput.value = textBeforeCursor + '\\overline{\\overline{\\overline{}}}' + textAfterCursor; // Add \overline{\overline{}} template
+            latexOutput = textBeforeCursor + '\\overline{\\overline{\\overline{}}}' + textAfterCursor;
+            renderLatexOutput();
+            textInput.selectionStart = cursorPosition + 30; // Move cursor position
+            textInput.selectionEnd = cursorPosition + 30;
         } else if (key === 'Single Underline') {
             textInput.value = textBeforeCursor + '\\underline{}' + textAfterCursor; // Add \underline{} template
             latexOutput = textBeforeCursor + '\\underline{}' + textAfterCursor;
