@@ -10,6 +10,12 @@ const dev_simple = document.querySelector('.dev_simple');
 const outputElement = document.querySelector('#output');
 const textInput = document.querySelector('#textInput');
 let latexOutput = '';
+let newlatexOutput = '';
+let numColumn = 3
+let numRow = 4
+
+// Get all input elements with class "inputCell"
+const inputCells = document.querySelectorAll('.inputCell');
 
 const keys = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0', 'Subscript', 'SuperScript', 'Left SuperScript' , 'Single Overline', 'Double Overline', 'Triple Overline', 'Dot', 'Double Dot', 'UnderDot', 'Double UnderDot', 'Single Underline', 'Curve', '⌣ (anudhruta)', '⌣', '⌢', '| above', '×', ',', '.', ';', '-', '=', '(', ')', '\'', '"', '/', '+', '*', 'o'];
 
@@ -311,103 +317,103 @@ keys.forEach(key => {
         if (key === 'Single Overline') {
             textInput.value = textBeforeCursor + '\\overline{}' + textAfterCursor; // Add \overline{} template
             latexOutput = textBeforeCursor + '\\overline{}' + textAfterCursor;
-            renderLatexOutput();
+            // renderLatexOutput();
             textInput.selectionStart = cursorPosition + 10; // Move cursor position
             textInput.selectionEnd = cursorPosition + 10;
         } else if (key === 'Double Overline') {
             textInput.value = textBeforeCursor + '\\overline{\\overline{}}' + textAfterCursor; // Add \overline{\overline{}} template
             latexOutput = textBeforeCursor + '\\overline{\\overline{}}' + textAfterCursor;
-            renderLatexOutput();
+            // renderLatexOutput();
             textInput.selectionStart = cursorPosition + 20; // Move cursor position
             textInput.selectionEnd = cursorPosition + 20;
         } else if (key === 'Triple Overline') {
             textInput.value = textBeforeCursor + '\\overline{\\overline{\\overline{}}}' + textAfterCursor; // Add \overline{\overline{}} template
             latexOutput = textBeforeCursor + '\\overline{\\overline{\\overline{}}}' + textAfterCursor;
-            renderLatexOutput();
+            // renderLatexOutput();
             textInput.selectionStart = cursorPosition + 30; // Move cursor position
             textInput.selectionEnd = cursorPosition + 30;
         } else if (key === 'Single Underline') {
             textInput.value = textBeforeCursor + '\\underline{}' + textAfterCursor; // Add \underline{} template
             latexOutput = textBeforeCursor + '\\underline{}' + textAfterCursor;
-            renderLatexOutput();
+            // renderLatexOutput();
             textInput.selectionStart = cursorPosition + 11; // Move cursor position
             textInput.selectionEnd = cursorPosition + 11;
         } else if (key === 'Subscript') {
             textInput.value = textBeforeCursor + '_{}' + textAfterCursor; // Modified: Use _{} template for subscript
             latexOutput = textBeforeCursor + '_{}' + textAfterCursor;
-            renderLatexOutput();
+            // renderLatexOutput();
             textInput.selectionStart = cursorPosition + 2; // Modified: Move cursor position
             textInput.selectionEnd = cursorPosition + 2;
         } else if (key === 'SuperScript') {
             textInput.value = textBeforeCursor + '^{}' + textAfterCursor; // Modified: Use ^{} template for superscript
             latexOutput = textBeforeCursor + '^{}' + textAfterCursor;
-            renderLatexOutput();
+            // renderLatexOutput();
             textInput.selectionStart = cursorPosition + 2; // Modified: Move cursor position
             textInput.selectionEnd = cursorPosition + 2;
         } else if (key === 'Left SuperScript') {
             textInput.value = textBeforeCursor + '^\\text{power}{Base}' + textAfterCursor; 
             latexOutput = textBeforeCursor + '^\\text{power}{Base}' + textAfterCursor;
-            renderLatexOutput();
+            // renderLatexOutput();
             textInput.selectionStart = cursorPosition + 19; // Modified: Move cursor position
             textInput.selectionEnd = cursorPosition + 19;
         } else if (key === ' ') {
             textInput.value = textBeforeCursor + ' ' + textAfterCursor; // Add space
             latexOutput = textBeforeCursor + ' ' + textAfterCursor;
-            renderLatexOutput();
+            // renderLatexOutput();
             textInput.selectionStart = cursorPosition + 1; // Move cursor position
             textInput.selectionEnd = cursorPosition + 1;
         } else if (key === 'Dot') { 
             textInput.value = textBeforeCursor + '\\dot{}' + textAfterCursor; // Add \dot{} template
             latexOutput = textBeforeCursor + '\\dot{}' + textAfterCursor;
-            renderLatexOutput();
+            // renderLatexOutput();
             textInput.selectionStart = cursorPosition + 5; // Move cursor position
             textInput.selectionEnd = cursorPosition + 5;
         } else if (key === 'Double Dot') { 
             textInput.value = textBeforeCursor + '\\ddot{}' + textAfterCursor; // Add \dot{} template
             latexOutput = textBeforeCursor + '\\ddot{}' + textAfterCursor;
-            renderLatexOutput();
+            // renderLatexOutput();
             textInput.selectionStart = cursorPosition + 6; // Move cursor position
             textInput.selectionEnd = cursorPosition + 6;
         } else if (key === 'UnderDot') { 
             textInput.value = textBeforeCursor + '\\underset{\\cdot}{\\text{}}' + textAfterCursor; 
             latexOutput = textBeforeCursor + '\\underset{\\cdot}{\\text{}}' + textAfterCursor;
-            renderLatexOutput();
+            // renderLatexOutput();
             textInput.selectionStart = cursorPosition + 23; // Move cursor position
             textInput.selectionEnd = cursorPosition + 23;
         } else if (key === 'Double UnderDot') { 
             textInput.value = textBeforeCursor + '\\underset{\\cdot\\cdot}{\\text{}}' + textAfterCursor; 
             latexOutput = textBeforeCursor + '\\underset{\\cdot\\cdot}{\\text{}}' + textAfterCursor;
-            renderLatexOutput();
+            // renderLatexOutput();
             textInput.selectionStart = cursorPosition + 28; // Move cursor position
             textInput.selectionEnd = cursorPosition + 28;
         } else if (key === 'Curve') { 
             textInput.value = textBeforeCursor + '\\widetilde{}' + textAfterCursor; // Add \widetilde{} template
             latexOutput = textBeforeCursor + '\\widetilde{}' + textAfterCursor;
-            renderLatexOutput();
+            // renderLatexOutput();
             textInput.selectionStart = cursorPosition + 11; // Move cursor position
             textInput.selectionEnd = cursorPosition + 11;
         } else if (key === '⌣') { 
             textInput.value = textBeforeCursor + '\\underset{\\smile}{\\text{}}' + textAfterCursor; // Add \underset{\smile}{\text{}} template
             latexOutput = textBeforeCursor + '\\underset{\\smile}{\\text{}}' + textAfterCursor;
-            renderLatexOutput();
+            // renderLatexOutput();
             textInput.selectionStart = cursorPosition + 24; // Move cursor position
             textInput.selectionEnd = cursorPosition + 24;
           } else if (key === '⌣ (anudhruta)') { 
             textInput.value = textBeforeCursor + '\\smile{}' + textAfterCursor; // Add \underset{\smile}{\text{}} template
             latexOutput = textBeforeCursor + '\\smile{}' + textAfterCursor;
-            renderLatexOutput();
+            // renderLatexOutput();
             textInput.selectionStart = cursorPosition + 8; // Move cursor position
             textInput.selectionEnd = cursorPosition + 8;
         } else if (key === '⌢') { 
             textInput.value = textBeforeCursor + '\\overset{\\frown}{\\text{}}' + textAfterCursor; // Add \underset{\smile}{\text{}} template
             latexOutput = textBeforeCursor + '\\overset{\\frown}{\\text{}}' + textAfterCursor;
-            renderLatexOutput();
+            // renderLatexOutput();
             textInput.selectionStart = cursorPosition + 23; // Move cursor position
             textInput.selectionEnd = cursorPosition + 23;
         } else if (key === '| above') { 
             textInput.value = textBeforeCursor + '\\overset{|}{}' + textAfterCursor; // Add \underset{\smile}{\text{}} template
             latexOutput = textBeforeCursor + '\\overset{|}{}' + textAfterCursor;
-            renderLatexOutput();
+            // renderLatexOutput();
             textInput.selectionStart = cursorPosition + 12; // Move cursor position
             textInput.selectionEnd = cursorPosition + 12;
         } 
@@ -416,7 +422,7 @@ keys.forEach(key => {
             latexOutput = textBeforeCursor + key + textAfterCursor;
             textInput.selectionStart = cursorPosition + key.length; // Move cursor position
             textInput.selectionEnd = cursorPosition + key.length;
-            renderLatexOutput();
+            // renderLatexOutput();
             console.log('textInput value:', textInput.value);
             console.log('Latex value:', latexOutput);
         }
@@ -435,10 +441,11 @@ swara1Keys.forEach(key => {
         const textAfterCursor = textInput.value.substring(cursorPosition);
   
         textInput.value = textBeforeCursor + key + textAfterCursor; // Append key to text input
+        textInput.focus();
         latexOutput = textBeforeCursor + key + textAfterCursor;
         textInput.selectionStart = cursorPosition + key.length; // Move cursor position
         textInput.selectionEnd = cursorPosition + key.length;
-        renderLatexOutput();
+        // renderLatexOutput();
         console.log('textInput value:', textInput.value);
         console.log('Latex value:', latexOutput);
         
@@ -459,7 +466,7 @@ swara2Keys.forEach(key => {
         latexOutput = textBeforeCursor + key + textAfterCursor;
         textInput.selectionStart = cursorPosition + key.length; // Move cursor position
         textInput.selectionEnd = cursorPosition + key.length;
-        renderLatexOutput();
+        // renderLatexOutput();
         console.log('textInput value:', textInput.value);
         console.log('Latex value:', latexOutput);
         
@@ -480,7 +487,7 @@ romKeys.forEach(key => {
         latexOutput = textBeforeCursor + key + textAfterCursor;
         textInput.selectionStart = cursorPosition + key.length; // Move cursor position
         textInput.selectionEnd = cursorPosition + key.length;
-        renderLatexOutput();
+        // renderLatexOutput();
         console.log('textInput value:', textInput.value);
         console.log('Latex value:', latexOutput);
         
@@ -501,7 +508,7 @@ romKeys_simple.forEach(key => {
       latexOutput = textBeforeCursor + key + textAfterCursor;
       textInput.selectionStart = cursorPosition + key.length; // Move cursor position
       textInput.selectionEnd = cursorPosition + key.length;
-      renderLatexOutput();
+      // renderLatexOutput();
       console.log('textInput value:', textInput.value);
       console.log('Latex value:', latexOutput);
       
@@ -522,7 +529,7 @@ devKeys.forEach(key => {
         latexOutput = textBeforeCursor + key + textAfterCursor;
         textInput.selectionStart = cursorPosition + key.length; // Move cursor position
         textInput.selectionEnd = cursorPosition + key.length;
-        renderLatexOutput();
+        // renderLatexOutput();
         console.log('textInput value:', textInput.value);
         console.log('Latex value:', latexOutput);
         
@@ -562,7 +569,7 @@ function createVariantButtons(variants) {
             latexOutput = textBeforeCursor + variant + textAfterCursor;
             textInput.selectionStart = cursorPosition + variant.length; // Move cursor position
             textInput.selectionEnd = cursorPosition + variant.length;
-            renderLatexOutput();
+            // renderLatexOutput();
         });
         dev.appendChild(variantKeyElement);
     });
@@ -598,10 +605,19 @@ function createVariantButtons(variants) {
 //     MathJax.Hub.Queue(["Typeset", MathJax.Hub, outputElement]);
 // }
 
+// function renderLatexOutput() {
+//     const modifiedLatexOutput = newlatexOutput.replace(/ /g, '\\ ').replace(/\n/g, '\\\\');
+//     outputElement.innerHTML = '$$' + modifiedLatexOutput + '$$';
+//     MathJax.Hub.Queue(["Typeset", MathJax.Hub, outputElement]);
+//     console.log("Triggered")
+//     console.log(modifiedLatexOutput)
+//     console.log(newlatexOutput)
+// }
+
 function renderLatexOutput() {
-    const modifiedLatexOutput = latexOutput.replace(/ /g, '\\ ').replace(/\n/g, '\\\\');
-    outputElement.innerHTML = '$$' + modifiedLatexOutput + '$$';
-    MathJax.Hub.Queue(["Typeset", MathJax.Hub, outputElement]);
+  const modifiedLatexOutput = newlatexOutput.replace(/ /g, '\\ ').replace(/\n/g, '\\\\');
+  outputElement.innerHTML = '$$\\begin{aligned}' + modifiedLatexOutput + '\\end{aligned}$$'; // Add alignment environment
+  MathJax.Hub.Queue(["Typeset", MathJax.Hub, outputElement]);
 }
 
 
@@ -665,8 +681,8 @@ function copyLatexOutputAsImage() {
 
 // Update latexOutput when user edits the text input
 textInput.addEventListener('input', () => {
-    latexOutput = textInput.value;
-    renderLatexOutput();
+    // latexOutput = textInput.value;
+    // renderLatexOutput();
 });
 
 // Function to copy LaTeX code from the textarea to clipboard
@@ -687,3 +703,130 @@ document.querySelector('#copyButton').addEventListener('click', copyLatexCode);
 document.querySelector('#copyImageButton').addEventListener('click', copyLatexOutputAsImage);
 
 document.querySelector('#downloadImageButton').addEventListener('click', downloadLatexOutputAsImage);
+
+
+
+// Add event listener to each input element
+inputCells.forEach(inputCell => {
+  inputCell.addEventListener('input', () => {
+      // Get the value of all input cells
+      const table_content = getAllCellValues();
+      
+      // Concatenate values with spaces
+      newlatexOutput = generateLatexOutput(table_content);
+      console.log(newlatexOutput)
+      // Update the displayed LaTeX output
+      renderLatexOutput();
+  });
+});
+
+
+// function getAllCellValues() {
+//   const cellValues = [];
+//   inputCells.forEach(inputCell => {
+//       cellValues.push(inputCell.value);
+//   });
+//   return cellValues;
+// }
+
+// Function to get all input cells
+function getInputCells() {
+  return document.querySelectorAll('#inputTable input[type="text"]');
+}
+
+// Function to get all input values from the cells
+function getAllCellValues() {
+  const cellValues = [];
+  const inputCells = getInputCells();
+  inputCells.forEach(inputCell => {
+      cellValues.push(inputCell.value);
+  });
+  return cellValues;
+}
+
+
+// Function to generate LaTeX output with rows and columns, removing empty cells
+function generateLatexOutput(table_content) {
+  let newLatexOutput = '\\begin{array}{|l|l|l|}';
+  let chunkCounter = 0;
+  let rowIsEmpty = true;
+  for (let i = 0; i < table_content.length; i++) {
+      if (table_content[i].trim() !== '') {
+          // Append non-empty cell
+          if (!rowIsEmpty) {
+              newLatexOutput += ' & '; // Add space for column
+          }
+          newLatexOutput += table_content[i];
+          rowIsEmpty = false;
+          // Add newline after every 3 elements, except for the last element
+          if ((i + 1) % numColumn === 0 && i !== table_content.length - 1) {
+              newLatexOutput += '\\\\\n'; // Add newline character for row
+              if (chunkCounter === 2) {
+                  newLatexOutput += '\\hline'; // Add horizontal line after every row
+                  chunkCounter = 0;
+              } else {
+                  chunkCounter++;
+              }
+              rowIsEmpty = true;
+          }
+      }
+  }
+  newLatexOutput += '\\end{array}';
+  return newLatexOutput;
+}
+
+
+
+
+// Add event listener for adding a row
+document.getElementById('addRowButton').addEventListener('click', () => {
+  const newRow = document.createElement('tr');
+  for (let i = 0; i < 3; i++) {
+      const newCell = document.createElement('td');
+      const newInput = document.createElement('input');
+      newInput.type = 'text';
+      newCell.appendChild(newInput);
+      newRow.appendChild(newCell);
+  }
+  document.getElementById('inputTable').appendChild(newRow);
+  numRow = numRow + 1
+});
+
+// Add event listener for adding a column
+document.getElementById('addColumnButton').addEventListener('click', () => {
+  const rows = document.querySelectorAll('#inputTable tr');
+  rows.forEach(row => {
+      const newCell = document.createElement('td');
+      const newInput = document.createElement('input');
+      newInput.type = 'text';
+      newCell.appendChild(newInput);
+      row.appendChild(newCell);
+  });
+  numColumn = numColumn + 1
+});
+
+// Add event listener for deleting a row
+document.getElementById('deleteRowButton').addEventListener('click', () => {
+  const table = document.getElementById('inputTable');
+  if (table.rows.length > 1) { // Ensure there's at least one row remaining
+      table.deleteRow(-1); // Delete the last row
+  } else {
+      alert('Cannot delete the last row.');
+  }
+  numRow = numRow - 1
+});
+
+// Add event listener for deleting a column
+document.getElementById('deleteColumnButton').addEventListener('click', () => {
+  const rows = document.querySelectorAll('#inputTable tr');
+  rows.forEach(row => {
+      if (row.cells.length > 1) { // Ensure there's at least one cell remaining
+          row.deleteCell(-1); // Delete the last cell in each row
+      } else {
+          alert('Cannot delete the last column.');
+      }
+  });
+  numColumn = numColumn - 1
+});
+
+

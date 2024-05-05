@@ -11,8 +11,36 @@
 <body>
     <h1>Music Latex Annotation</h1>
     <textarea id="textInput"></textarea>
-
+    <table border="1" id="inputTable">
+        <tr>
+          <td><input type="text" class="inputCell"></td>
+          <td><input type="text" class="inputCell"></td>
+          <td><input type="text" class="inputCell"></td>
+        </tr>
+        <tr>
+          <td><input type="text" class="inputCell"></td>
+          <td><input type="text" class="inputCell"></td>
+          <td><input type="text" class="inputCell"></td>
+        </tr>
+        <tr>
+          <td><input type="text" class="inputCell"></td>
+          <td><input type="text" class="inputCell"></td>
+          <td><input type="text" class="inputCell"></td>
+        </tr>
+        <tr>
+          <td><input type="text" class="inputCell"></td>
+          <td><input type="text" class="inputCell"></td>
+          <td><input type="text" class="inputCell"></td>
+        </tr>
+      </table>
+      
     <div class="empty-div"></div>
+    <button id="addRowButton">Add Row</button>
+    <button id="addColumnButton">Add Column</button>
+    <button id="deleteRowButton">Delete Row</button>
+    <button id="deleteColumnButton">Delete Column</button>
+    <div class="empty-div"></div>
+    
     <div id="latexOutputContainer">
         <div id="output"></div>
       </div>
