@@ -830,3 +830,51 @@ document.getElementById('deleteColumnButton').addEventListener('click', () => {
 });
 
 
+document.addEventListener("DOMContentLoaded", function() {
+  // Function to handle the click event of the "Play Audio" button
+  document.getElementById("playAudioButton").addEventListener("click", function() {
+      // Get the content of the second row
+      var secondRowInputs = document.querySelectorAll("#inputTable tr:nth-child(2) input.inputCell");
+      var content = "";
+      secondRowInputs.forEach(function(input) {
+          content += input.value + " "; // Concatenate the content
+      });
+      content = content.trim(); // Remove trailing space
+
+      // Split the content by space
+      var tokens = content.split(" ");
+
+      // Map tokens to corresponding audio files
+      var audioFiles = {
+          "S": "Assets/40.mp3",
+          "R1": "Assets/41.mp3",
+          "R2": "Assets/42.mp3",
+          "G1": "Assets/43.mp3",
+          "G2": "Assets/44.mp3",
+          "M1": "Assets/45.mp3",
+          "M2": "Assets/46.mp3",
+          "P": "Assets/47.mp3",
+          "D1": "Assets/48.mp3",
+          "D2": "Assets/49.mp3",
+          "N1": "Assets/50.mp3",
+          "N2": "Assets/51.mp3"
+      };
+
+      // Play audio files at equal intervals
+      var interval = 500; // Interval in milliseconds
+      var currentIndex = 0;
+      var audioInterval = setInterval(function() {
+          if (currentIndex < tokens.length) {
+              var token = tokens[currentIndex];
+              var audioFile = audioFiles[token];
+              if (audioFile) {
+                  var audio = new Audio(audioFile);
+                  audio.play();
+              }
+              currentIndex++;
+          } else {
+              clearInterval(audioInterval); // Stop the interval when all tokens have been played
+          }
+      }, interval);
+  });
+});
